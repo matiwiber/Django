@@ -2,13 +2,20 @@
 <html>
 <head>
     <title>Lista de Productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Lista de Productos</h1>
-    <ul>
-        {% for producto in object_list %}
-            <li>{{ producto.nombre }} - {{ producto.categoria.nombre }} - ${{ producto.precio }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1 class="mt-5">Lista de Productos</h1>
+        <ul class="list-group mt-3">
+            {% for producto in object_list %}
+                <li class="list-group-item">
+                    <strong>{{ producto.nombre }}</strong><br>
+                    Categoría: {{ producto.categoria.nombre }}<br>
+                    Precio: ${{ producto.precio }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

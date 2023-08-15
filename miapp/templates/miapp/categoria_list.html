@@ -2,13 +2,16 @@
 <html>
 <head>
     <title>Lista de Categorías</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Lista de Categorías</h1>
-    <ul>
-        {% for categoria in object_list %}
-            <li>{{ categoria.nombre }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1 class="mt-5">Lista de Categorías</h1>
+        <ul class="list-group mt-3">
+            {% for categoria in object_list %}
+                <li class="list-group-item">{{ categoria.nombre }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
