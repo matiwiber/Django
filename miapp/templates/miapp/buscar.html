@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buscar Productos</title>
+</head>
+<body>
+    <h1>Buscar Productos</h1>
+    <form method="get" action="{% url 'buscar' %}">
+        <input type="text" name="q" placeholder="Buscar...">
+        <button type="submit">Buscar</button>
+    </form>
+    <ul>
+        {% for producto in object_list %}
+            <li>{{ producto.nombre }} - {{ producto.categoria.nombre }} - ${{ producto.precio }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
