@@ -53,6 +53,7 @@ class ProductoCreateView(CreateView):
 
     def get_form(self, form_class=None):
        form = super().get_form(form_class)
+       # Modifica el campo de categoría para mostrar el nombre en lugar del ID
        form.fields['categoria'].queryset = Categoria.objects.all()
        return form
 
@@ -76,3 +77,17 @@ def eliminar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     producto.delete()
     return redirect('producto-list')
+
+def eliminar_categoria(request, categoria_id):
+    # Obtén la categoría que deseas eliminar
+    categoria = get_object_or_404(Categoria, id=categoria_id)
+
+    if request.method == 'POST':
+        # Verifica si el usuario confirma la eliminación
+        if 'confirmar' in request.POST:
+            categoria.delete()
+            return redirect('categoria-list')  # Redirige a la lista de categorías después de eliminar una
+        else:
+            return redirect('categoria-list')  # Redirige de vuelta a la lista sin eliminar
+
+    return render(request, 'miapp/eliminar_categoria.html', {'categoria': categoria})

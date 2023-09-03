@@ -5,16 +5,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    
     {% include 'miapp/navbar.html' %}
 
     <div class="container">
         <h1 class="mt-5">Lista de Categorías</h1>
-        <ul class="list-group mt-3">
-            {% for categoria in object_list %}
-                <li class="list-group-item">{{ categoria.nombre }}</li>
-            {% endfor %}
-        </ul>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in object_list %}
+                    <tr>
+                        <td>{{ categoria.id }}</td>
+                        <td>{{ categoria.nombre }}</td>
+                        <td>
+                            <a href="{% url 'eliminar-categoria' categoria.id %}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

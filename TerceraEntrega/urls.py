@@ -29,8 +29,10 @@ urlpatterns = [
     path('categoria/nueva/', login_required(views.CategoriaCreateView.as_view()), name='categoria-create'),
     path('producto/nuevo/', login_required(views.ProductoCreateView.as_view()), name='producto-create'),
     path('producto/<int:producto_id>/eliminar/', login_required(views.eliminar_producto), name='eliminar-producto'),
+    path('categoria/eliminar/<int:categoria_id>/', login_required(views.eliminar_categoria), name='eliminar-categoria'),
     path('buscar/', views.BuscarView.as_view(), name='buscar'),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('register/', views.register, name='register'),
     path('logout/', LogoutView.as_view(), name='logout'),
+
 ]
