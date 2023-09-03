@@ -18,13 +18,31 @@ from django.contrib import admin
 from django.urls import path
 from miapp.models import *
 from miapp import views
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth.decorators import login_required
 
+'''
+urlpatterns = [
+    path('', views.PaginaPrincipalView, name='pagina-principal'),
+    path('/categorias/', login_required(views.CategoriaListView.as_view()), name='categoria-list'),
+    path('/productos/', login_required(views.ProductoListView.as_view()), name='producto-list'),
+    path('/categoria/nueva/', login_required(views.CategoriaCreateView.as_view()), name='categoria-create'),
+    path('/producto/nuevo/', login_required(views.ProductoCreateView.as_view()), name='producto-create'),
+    path('/buscar/', views.BuscarView.as_view(), name='buscar'),
+    path('login/', views.CustomLoginView.as_view(), name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+]
+'''
 
 urlpatterns = [
     path('', views.PaginaPrincipalView, name='pagina-principal'),
-    path('/categorias/', views.CategoriaListView.as_view(), name='categoria-list'),
-    path('/productos/', views.ProductoListView.as_view(), name='producto-list'),
-    path('/categoria/nueva/', views.CategoriaCreateView.as_view(), name='categoria-create'),
-    path('/producto/nuevo/', views.ProductoCreateView.as_view(), name='producto-create'),
-    path('/buscar/', views.BuscarView.as_view(), name='buscar'),
+    path('categorias/', login_required(views.CategoriaListView.as_view()), name='categoria-list'),
+    path('productos/', login_required(views.ProductoListView.as_view()), name='producto-list'),
+    path('categoria/nueva/', login_required(views.CategoriaCreateView.as_view()), name='categoria-create'),
+    path('producto/nuevo/', login_required(views.ProductoCreateView.as_view()), name='producto-create'),
+    path('buscar/', views.BuscarView.as_view(), name='buscar'),
+    path('login/', views.CustomLoginView.as_view(), name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
