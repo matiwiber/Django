@@ -21,6 +21,9 @@ Ejecuta el servidor: "" python manage.py runserver. ""
 - Búsqueda de productos por nombre.
 - Interfaz de usuario amigable.
 
+
+![me](https://github.com/Daisyliu6/Daisyliu6/blob/master/me.gif)
+
 ## Rutas
 
 - **Página Principal:** La página principal muestra una bienvenida y enlaces a otras secciones.
