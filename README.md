@@ -22,7 +22,7 @@ Ejecuta el servidor: "" python manage.py runserver. ""
 - Interfaz de usuario amigable.
 
 
-![me](https://github.com/Daisyliu6/Daisyliu6/blob/master/me.gif)
+![Muestra](https://github.com/matiwiber/Django/blob/main/Animation.gif)
 
 ## Rutas
 
