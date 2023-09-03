@@ -1,9 +1,12 @@
 from pyexpat.errors import messages
+from typing import Optional, Type
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.forms.models import BaseModelForm
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, CreateView
 from .models import Categoria, Producto
 from .forms import CategoriaForm, ProductoForm
@@ -11,32 +14,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-
-
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            messages.success(request, f'¡Registro exitoso! Ahora puedes iniciar sesión como {username}.')
-            return redirect('/login/')  # Reemplaza 'home' con la URL a la que deseas redirigir después del registro
-    else:
-        form = UserCreationForm()
-    return render(request, 'miapp/register.html', {'form': form})
-
-
-
 class CustomLoginView(LoginView):
-    template_name = 'miapp/login.html'  # Nombre de la plantilla de inicio de sesión
-    success_url = reverse_lazy('')  # URL a la que se redirigirá después del inicio de sesión
+    template_name = 'miapp/login.html'
+    success_url = reverse_lazy('')
 
-
-def PaginaPrincipalView(request):
-    return render(request, 'miapp/pagina_principal.html')
+class PaginaPrincipalView(View):
+    def get(self, request):
+        return render(request, 'miapp/pagina_principal.html')
 
 class BuscarView(ListView):
     template_name = 'miapp/buscar.html'
@@ -67,4 +51,28 @@ class ProductoCreateView(CreateView):
     template_name = 'miapp/producto_form.html'
     success_url = reverse_lazy('producto-list')
 
+    def get_form(self, form_class=None):
+       form = super().get_form(form_class)
+       form.fields['categoria'].queryset = Categoria.objects.all()
+       return form
 
+# Vistas de funciones
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, f'¡Registro exitoso! Ahora puedes iniciar sesión como {username}.')
+            return redirect('/login/') 
+    else:
+        form = UserCreationForm()
+    return render(request, 'miapp/register.html', {'form': form})
+
+def eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    producto.delete()
+    return redirect('producto-list')

@@ -21,26 +21,14 @@ from miapp import views
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.decorators import login_required
 
-'''
-urlpatterns = [
-    path('', views.PaginaPrincipalView, name='pagina-principal'),
-    path('/categorias/', login_required(views.CategoriaListView.as_view()), name='categoria-list'),
-    path('/productos/', login_required(views.ProductoListView.as_view()), name='producto-list'),
-    path('/categoria/nueva/', login_required(views.CategoriaCreateView.as_view()), name='categoria-create'),
-    path('/producto/nuevo/', login_required(views.ProductoCreateView.as_view()), name='producto-create'),
-    path('/buscar/', views.BuscarView.as_view(), name='buscar'),
-    path('login/', views.CustomLoginView.as_view(), name='login'),
-    path('register/', views.register, name='register'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-]
-'''
 
 urlpatterns = [
-    path('', views.PaginaPrincipalView, name='pagina-principal'),
+    path('', views.PaginaPrincipalView.as_view(), name='pagina-principal'),
     path('categorias/', login_required(views.CategoriaListView.as_view()), name='categoria-list'),
     path('productos/', login_required(views.ProductoListView.as_view()), name='producto-list'),
     path('categoria/nueva/', login_required(views.CategoriaCreateView.as_view()), name='categoria-create'),
     path('producto/nuevo/', login_required(views.ProductoCreateView.as_view()), name='producto-create'),
+    path('producto/<int:producto_id>/eliminar/', login_required(views.eliminar_producto), name='eliminar-producto'),
     path('buscar/', views.BuscarView.as_view(), name='buscar'),
     path('login/', views.CustomLoginView.as_view(), name='login'),
     path('register/', views.register, name='register'),
