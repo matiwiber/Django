@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    {% include 'miapp/navbar.html' %}
+
+    <div class="container mt-5">
+        <h1>Registro de Usuario</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary mt-3">Registrarse</button>
+        </form>
+        <p class="mt-3">¿Ya tienes una cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
+        
+    </div>
+</body>
+</html>

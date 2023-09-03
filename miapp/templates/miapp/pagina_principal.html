@@ -5,40 +5,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Bienvenido a la Página Principal</h1>
-    <p>¡Explora nuestras secciones!</p>
-    <ul>
-        <li><a href="{% url 'categoria-list' %}">Lista de Categorías</a></li>
-        <li><a href="{% url 'producto-list' %}">Lista de Productos</a></li>
-        <li><a href="{% url 'categoria-create' %}">Crear Categoría</a></li>
-        <li><a href="{% url 'producto-create' %}">Crear Producto</a></li>
-        <li><a href="{% url 'buscar' %}">Buscar Productos</a></li>
-    </ul>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        
-        h1 {
-            color: #333;
-        }
-        
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        .producto {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
     
+    {% include 'miapp/navbar.html' %}
+
+        <h1>Bienvenido a la Página Principal</h1>
+        <p>¡Explora nuestras secciones!</p>
+        <ul>
+            <li><a href="{% url 'categoria-list' %}">Lista de Categorías</a></li>
+            <li><a href="{% url 'producto-list' %}">Lista de Productos</a></li>
+            <li><a href="{% url 'categoria-create' %}">Crear Categoría</a></li>
+            <li><a href="{% url 'producto-create' %}">Crear Producto</a></li>
+            <li><a href="{% url 'buscar' %}">Buscar Productos</a></li>
+        </ul>
+        <br>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+        {% endif %}
+
 </body>
 </html>

@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    {% include 'miapp/navbar.html' %}
+
     <div class="container">
         <h1 class="mt-5">Lista de Productos</h1>
         <ul class="list-group mt-3">
@@ -13,6 +15,10 @@
                     <strong>{{ producto.nombre }}</strong><br>
                     Categoría: {{ producto.categoria.nombre }}<br>
                     Precio: ${{ producto.precio }}
+                    <form method="post" action="{% url 'eliminar-producto' producto.id %}" class="mt-2">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>
